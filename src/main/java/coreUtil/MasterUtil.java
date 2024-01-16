@@ -1,5 +1,5 @@
 package coreUtil;
-
+// Adding comment to check the automation trigger
 public class MasterUtil {
 
 	public void baseMethod() {
