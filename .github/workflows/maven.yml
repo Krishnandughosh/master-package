@@ -1,0 +1,29 @@
+name: Maven Test and Trigger Another Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Build with Maven
+        run: mvn -B clean install
+
+      - name: Trigger Another Project
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"event_type": "trigger-maven-test"}' \
+          https://github.com/Krishnandughosh/child_util.git/dispatches
