@@ -27,3 +27,12 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{"event_type": "trigger-maven-test"}' \
           https://github.com/Krishnandughosh/child_util.git/dispatches
+
+
+      - name: Test workflow run other
+        run: |
+          curl -X POST https://api.github.com/repos/:Krishnandughosh/:child_util/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACTION_KEY }} \
+          --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+      
